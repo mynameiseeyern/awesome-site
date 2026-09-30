@@ -55,10 +55,10 @@ export function Footer() {
   };
 
   const cyclePaper = () => {
-    const papers = ["plain", "dots", "ruled"];
+    const papers = ["dots", "ruled", "plain"];
     paper.current = (paper.current + 1) % papers.length;
-    document.body.classList.remove("dots", "ruled");
-    if (papers[paper.current] !== "plain") document.body.classList.add(papers[paper.current]);
+    document.body.classList.remove("ruled", "plain");
+    if (papers[paper.current] !== "dots") document.body.classList.add(papers[paper.current]);
     say(`Paper: ${papers[paper.current]}`);
   };
 
