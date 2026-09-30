@@ -1,0 +1,293 @@
+/* Generated from the approved single-file design; tokens first, then components. */
+html,body{padding:0;margin:0}
+
+/* Layout: one calm 760px reading column, lots of air, hairlines instead of boxes. Notion's warmth and charcoal,
+   a couple of pen annotations and sketched thumbnails for the hand-drawn feel, nothing else decorated. */
+:root{
+  --paper:#FBFBF9;
+  --paper-2:#F3F3F0;
+  --ink:#37352F;
+  --ink-2:#6B6963;
+  --ink-3:#8F8D87;
+  --rule:#E6E5E0;
+  --line:#37352F;
+  --primary:#5645D4;
+  --primary-press:#4534B3;
+  --pen:#2B4A8B;
+  --peach:#FFE8D4;--rose:#FDE0EC;--mint:#D9F3E1;--lavender:#E6E0F5;--sky:#DCECFA;--yellow:#FEF7D6;
+  --font-sans:var(--font-geist-sans),system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-hand:"Caveat Variable","Segoe Print","Bradley Hand",cursive;
+  --ease:cubic-bezier(.16,1,.3,1);
+  --shadow:0 24px 48px -8px rgba(15,15,15,.18);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#191919;--paper-2:#222221;--ink:#D9D8D3;--ink-2:#A3A29E;--ink-3:#7E7D79;--rule:#2C2C2B;--line:#D9D8D3;
+    --primary:#7A6CE8;--primary-press:#6656D9;--pen:#9DB4E8;
+    --peach:#3E2E25;--rose:#3E2833;--mint:#22362B;--lavender:#2F2C40;--sky:#22313F;--yellow:#3D3822;
+    --shadow:0 24px 48px -8px rgba(0,0,0,.6);color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#191919;--paper-2:#222221;--ink:#D9D8D3;--ink-2:#A3A29E;--ink-3:#7E7D79;--rule:#2C2C2B;--line:#D9D8D3;
+  --primary:#7A6CE8;--primary-press:#6656D9;--pen:#9DB4E8;
+  --peach:#3E2E25;--rose:#3E2833;--mint:#22362B;--lavender:#2F2C40;--sky:#22313F;--yellow:#3D3822;
+  --shadow:0 24px 48px -8px rgba(0,0,0,.6);color-scheme:dark;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;position:relative;transition:background-color .35s var(--ease),color .35s var(--ease)}
+body.dots{background-image:radial-gradient(var(--rule) 1.1px,transparent 1.2px);background-size:24px 24px}
+body.ruled{background-image:linear-gradient(var(--rule) 1px,transparent 1px);background-size:100% 28px}
+::selection{background:var(--lavender);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img,svg{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--primary);outline-offset:3px;border-radius:4px}
+.hand{font-family:var(--font-hand);color:var(--pen);font-weight:600;line-height:1.1}
+.col{width:min(100% - 40px,760px);margin-inline:auto}
+
+/* nav */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;height:60px;display:flex;align-items:center;justify-content:space-between;
+  background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.top .name{font-weight:600;font-size:15px;letter-spacing:-.01em}
+.top ul{display:flex;gap:2px;list-style:none;align-items:center}
+.top ul a,.top ul button{font-size:14px;color:var(--ink-2);padding:6px 10px;border-radius:6px;transition:background .25s var(--ease),color .25s var(--ease);display:inline-flex;align-items:center}
+.top ul a:hover,.top ul button:hover{background:var(--paper-2);color:var(--ink)}
+.top ul svg{width:15px;height:15px}
+@media (max-width:600px){.top ul li:nth-child(2),.top ul li:nth-child(3){display:none}}
+
+/* hero */
+.hero{padding-block:clamp(64px,12vh,128px) clamp(48px,8vh,88px)}
+.hero h1{font-size:clamp(40px,7vw,68px);font-weight:700;letter-spacing:-.035em;line-height:1.02;display:flex;align-items:baseline;gap:.25em;flex-wrap:wrap}
+.hero h1 .wave{width:.8em;height:.8em;align-self:center;transform-origin:70% 70%}
+.underline{height:12px;width:190px;display:block;margin-top:2px}
+.underline path{fill:none;stroke:var(--pen);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:400;stroke-dashoffset:0}
+.hero .lede{margin-top:28px;font-size:clamp(19px,2.2vw,24px);line-height:1.4;letter-spacing:-.01em;max-width:30ch;text-wrap:pretty}
+.hero .sub{margin-top:14px;font-size:16px;color:var(--ink-2);max-width:52ch}
+.cta{display:flex;gap:10px;margin-top:32px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;height:42px;padding-inline:18px;border-radius:8px;font-size:14.5px;font-weight:500;white-space:nowrap;
+  border:1px solid var(--rule);background:var(--paper);transition:transform .25s var(--ease),background .25s var(--ease)}
+.btn:hover{background:var(--paper-2);transform:translateY(-1px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
+.btn.primary:hover{background:var(--primary-press)}
+.btn svg{width:14px;height:14px}
+.annot{display:flex;align-items:center;gap:2px;margin-left:8px}
+.annot svg{width:64px;height:36px}
+.annot path{fill:none;stroke:var(--pen);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.annot .hand{font-size:22px;transform:rotate(-3deg)}
+@media (max-width:600px){.annot{display:none}}
+
+/* portrait: pencil sketch by default (grayscale + inverted blurred copy in colour-dodge), colour on hover */
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:32px;align-items:center}
+.portrait{position:relative;width:clamp(120px,16vw,180px);aspect-ratio:1;border-radius:14px;overflow:hidden;transform:rotate(-4deg);
+  background:var(--paper-2);transition:transform .6s var(--ease)}
+.portrait:hover{transform:rotate(0deg) scale(1.03)}
+.portrait img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.portrait .base{filter:grayscale(1) contrast(1.15);transition:filter .7s var(--ease)}
+.portrait .dodge{filter:grayscale(1) invert(1) blur(3px);mix-blend-mode:color-dodge;opacity:1;transition:opacity .7s var(--ease)}
+.portrait:hover .base{filter:none}
+.portrait:hover .dodge{opacity:0}
+.portrait .cap{position:absolute;left:0;right:0;bottom:-30px;text-align:center;font-size:19px;pointer-events:none}
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr}.portrait{display:none}}
+@media (prefers-reduced-motion:reduce){.portrait,.portrait .base,.portrait .dodge{transition:none}}
+
+/* sections */
+.sec{padding-block:clamp(40px,7vh,72px);border-top:1px solid var(--rule)}
+.sec h2{font-size:22px;font-weight:600;letter-spacing:-.02em;scroll-margin-top:80px;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.sec h2 .hand{font-size:20px;font-weight:500;transform:rotate(-2deg)}
+
+/* work */
+.grid{margin-top:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.card{text-align:left;border-radius:12px;background:var(--paper-2);transition:transform .45s var(--ease);display:flex;flex-direction:column;position:relative}
+.card:hover{transform:translateY(-3px)}
+/* crayon border: drawn in JS to the card's real size, revealed on hover like a crayon going round the edge */
+.crayon{position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);pointer-events:none;overflow:visible}
+.crayon path{fill:none;stroke:var(--pen);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;opacity:.9;filter:url(#crayon);transition:stroke-dashoffset .7s var(--ease),opacity .3s var(--ease)}
+.crayon path.b{stroke-width:1.6;opacity:.4;transition-delay:.08s}
+.card:hover .crayon path,.card:focus-visible .crayon path{stroke-dashoffset:0}
+.card:focus-visible{outline:0}
+.card .thumb{height:170px;position:relative;border-radius:12px 12px 0 0;overflow:hidden;background:color-mix(in srgb,var(--tint,var(--paper-2)) 55%,var(--paper-2))}
+.card .thumb svg{position:absolute;inset:0;width:100%;height:100%}
+.card .thumb svg *{stroke:var(--line);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.card .thumb svg .fill{fill:var(--paper)}
+.card .thumb .open{position:absolute;right:12px;top:12px;font-size:12px;color:var(--ink-2);background:var(--paper);padding:4px 9px;border-radius:6px;opacity:0;transform:translateY(-4px);transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.card:hover .open{opacity:1;transform:none}
+.card .body{padding:14px 18px 18px}
+.card h3{font-size:16px;font-weight:600}
+.card p{font-size:14px;color:var(--ink-2);margin-top:4px;line-height:1.5}
+.card .meta{font-size:12.5px;color:var(--ink-3);margin-top:10px}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+
+/* peek */
+.scrim{position:fixed;inset:0;background:rgba(15,15,15,.32);opacity:0;pointer-events:none;transition:opacity .35s var(--ease);z-index:20}
+.scrim.on{opacity:1;pointer-events:auto}
+.peek{position:fixed;top:0;right:0;bottom:0;width:min(100%,600px);background:var(--paper);z-index:21;transform:translateX(102%);transition:transform .55s var(--ease);
+  box-shadow:var(--shadow);overflow-y:auto;padding:22px 32px 56px;padding-top:calc(22px + env(safe-area-inset-top,0px))}
+.peek.on{transform:none}
+.peek .bar{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--ink-3)}
+.peek .close{width:32px;height:32px;border-radius:6px;display:grid;place-items:center;transition:background .25s var(--ease)}
+.peek .close:hover{background:var(--paper-2)}
+.peek .close svg{width:16px;height:16px}
+.peek .hero-img{margin-top:18px;height:180px;border-radius:12px;position:relative;overflow:hidden;background:color-mix(in srgb,var(--tint,var(--paper-2)) 55%,var(--paper-2))}
+.peek .hero-img svg{position:absolute;inset:0;width:100%;height:100%}
+.peek .hero-img svg *{stroke:var(--line);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.peek .hero-img svg .fill{fill:var(--paper)}
+.peek h2{font-size:30px;font-weight:700;letter-spacing:-.025em;margin-top:22px;line-height:1.1}
+.peek .meta{margin-top:8px;font-size:14px;color:var(--ink-2)}
+.peek .lead{margin-top:20px;font-size:16.5px;line-height:1.6}
+.peek h4{margin-top:26px;font-size:13px;font-weight:600;color:var(--ink-3);letter-spacing:.02em}
+.peek ul{margin-top:10px;display:grid;gap:9px;list-style:none}
+.peek li{display:flex;gap:10px;font-size:15px;line-height:1.5}
+.peek li .chk{width:18px;height:18px;flex:none;margin-top:3px}
+.peek li .chk *{stroke:var(--line);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.peek li .chk .tick{stroke:var(--primary);stroke-width:2.2}
+.peek .ph{margin-top:24px;padding:14px 16px;font-size:13px;color:var(--ink-3);border:1.5px dashed var(--rule);border-radius:10px}
+.peek .ph .hand{font-size:19px}
+
+/* how I work */
+.todos{margin-top:22px;display:grid}
+.todo{display:grid;grid-template-columns:26px 1fr;gap:14px;padding-block:20px;border-bottom:1px solid var(--rule);align-items:start}
+.todo:last-child{border-bottom:0}
+.todo .box{width:20px;height:20px;margin-top:3px}
+.todo .box *{stroke:var(--line);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.todo .box .tick{stroke:var(--primary);stroke-width:2.3;stroke-dasharray:30;stroke-dashoffset:30}
+.todo.done .box .tick{animation:draw .5s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.todo h3{font-size:17px;font-weight:600;letter-spacing:-.01em}
+.todo p{margin-top:4px;font-size:15px;color:var(--ink-2);max-width:58ch}
+
+/* experience */
+.xp{margin-top:22px;display:grid}
+.xp .r{display:grid;grid-template-columns:150px 1fr;gap:16px;padding-block:14px;border-bottom:1px solid var(--rule);align-items:baseline;font-size:15px}
+.xp .r:last-child{border-bottom:0}
+.xp .y{color:var(--ink-3);font-size:13.5px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.xp .r b{font-weight:500}
+.xp .r span{color:var(--ink-2)}
+.xp .r.now b{position:relative}
+.xp .r.now .hand{position:absolute;left:0;top:-18px;font-size:18px;font-weight:500;white-space:nowrap;transform:rotate(-3deg)}
+@media (max-width:560px){.xp .r{grid-template-columns:1fr;gap:2px}}
+
+/* about */
+.about p{margin-top:18px;font-size:16px;color:var(--ink-2);max-width:58ch}
+.about p b{color:var(--ink);font-weight:500}
+
+/* contact */
+.contact .big{margin-top:18px;font-size:clamp(20px,3.2vw,30px);font-weight:600;letter-spacing:-.02em;line-height:1.3;max-width:24ch}
+.email-row{margin-top:18px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.email{font-size:clamp(17px,2.4vw,22px);font-weight:500;word-break:break-all;border-bottom:2px solid var(--rule);transition:border-color .3s var(--ease)}
+.email:hover{border-color:var(--pen)}
+.copy{height:32px;padding-inline:11px;border-radius:6px;border:1px solid var(--rule);font-size:13px;transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease)}
+.copy:hover{background:var(--paper-2)}
+.copy.done{background:var(--primary);color:#fff;border-color:var(--primary)}
+.links{margin-top:16px;display:flex;gap:20px;flex-wrap:wrap;font-size:14px;color:var(--ink-2)}
+.links a{display:inline-flex;gap:6px;align-items:center;border-bottom:1px solid transparent;transition:color .25s var(--ease),border-color .25s var(--ease)}
+.links a:hover{color:var(--ink);border-color:var(--ink)}
+.links svg{width:11px;height:11px}
+
+/* footer + eggs */
+.foot{padding-block:28px 56px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink-3);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.foot kbd{font:inherit;border:1px solid var(--rule);border-radius:4px;padding:1px 5px}
+.cup{display:inline-flex;align-items:center;gap:8px;user-select:none;border-radius:6px;padding:4px 6px;transition:background .25s var(--ease)}
+.cup:hover{background:var(--paper-2)}
+.cup svg{width:24px;height:24px;overflow:visible}
+.cup svg *{fill:none;stroke:var(--line);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.cup svg .steam{stroke:var(--ink-3);opacity:0}
+.cup:hover svg .steam,.cup.sip svg .steam{animation:steam 1.6s ease-in-out infinite}
+.cup svg .steam:nth-child(2){animation-delay:.3s}
+.cup svg .steam:nth-child(3){animation-delay:.6s}
+@keyframes steam{0%{opacity:0;transform:translateY(2px)}40%{opacity:.8}100%{opacity:0;transform:translateY(-6px)}}
+.cup.sip svg .body{animation:sip .6s var(--ease)}
+@keyframes sip{40%{transform:rotate(-14deg) translateY(-2px)}}
+.cup .hand{font-size:19px;font-weight:500}
+.tally{display:inline-flex;gap:3px;align-items:flex-end;height:16px;margin-left:4px}
+.tally i{display:block;width:2px;height:14px;background:var(--pen);border-radius:2px;transform:rotate(var(--t,0deg));transform-origin:bottom}
+.tally i.x{width:22px;height:2px;margin-left:-22px;transform:rotate(-24deg) translateY(-6px)}
+.stain{position:absolute;width:150px;height:150px;pointer-events:none;z-index:1;opacity:0;transform:scale(.6) rotate(var(--r,0deg));transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+.stain.in{opacity:1;transform:scale(1) rotate(var(--r,0deg))}
+.stain path{fill:none;stroke:#8B5A2B;stroke-linecap:round;opacity:.26;mix-blend-mode:multiply}
+:root[data-theme="dark"] .stain path{opacity:.5;mix-blend-mode:normal}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .stain path{opacity:.5;mix-blend-mode:normal}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:var(--ink);color:var(--paper);padding:8px 14px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .3s var(--ease),transform .3s var(--ease);z-index:30;pointer-events:none;white-space:nowrap}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* motion */
+.js .ld{opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.js .ld.in{opacity:1;transform:none}
+.js .underline path{stroke-dashoffset:400;transition:stroke-dashoffset 1.2s var(--ease) .5s}
+.js .underline.in path{stroke-dashoffset:0}
+@keyframes wave{0%,100%{transform:rotate(0)}30%{transform:rotate(14deg)}60%{transform:rotate(-8deg)}}
+.hero h1:hover .wave{animation:wave 1s var(--ease)}
+@supports (animation-timeline: view()){
+  .rv{animation:rise 1ms linear both;animation-timeline:view();animation-range:entry 5% entry 40%}
+  .grid .card{animation:rise 1ms linear both;animation-timeline:view();animation-range:entry 0% entry 50%}
+  @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .crayon path{transition:none}
+  .js .ld{opacity:1;transform:none;transition:none}
+  .js .underline path{stroke-dashoffset:0;transition:none}
+  .rv,.grid .card{animation:none}
+  .hero h1:hover .wave,.cup svg .steam{animation:none!important}
+  .stain{transition:none}
+  *{transition-duration:.01ms!important}
+}
+
+/* ---------- featured card (first in the grid spans both columns) ---------- */
+.card.featured{grid-column:1 / -1;flex-direction:row}
+.card.featured .thumb{flex:0 0 52%;height:auto;min-height:220px;border-radius:12px 0 0 12px}
+.card.featured .body{padding:22px 24px;display:flex;flex-direction:column;justify-content:center}
+.card.featured h3{font-size:20px}
+.card.featured p{font-size:15px;margin-top:6px}
+@media (max-width:560px){.card.featured{flex-direction:column}.card.featured .thumb{flex:none;height:170px;min-height:0;border-radius:12px 12px 0 0}}
+a.card{color:inherit}
+
+/* ---------- mentoring ---------- */
+.mentoring p{margin-top:16px;color:var(--ink-2);max-width:58ch}
+.mentoring blockquote{margin-top:18px;padding-left:16px;border-left:2px solid var(--pen);max-width:52ch}
+.mentoring blockquote p{margin:0;color:var(--ink);font-size:17px;line-height:1.5}
+.mentoring cite{display:block;margin-top:6px;font-style:normal;font-size:13px;color:var(--ink-3)}
+.mentoring .btn{margin-top:20px}
+
+/* ---------- portrait on a cutout photo ---------- */
+.portrait{background:color-mix(in srgb,var(--sky) 55%,var(--paper-2))}
+.portrait img{object-position:center top}
+
+/* ---------- case study page ---------- */
+.cs article{padding-block:clamp(40px,7vh,72px) 24px}
+.cs .back{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--ink-2);padding:6px 10px;margin-left:-10px;border-radius:6px;transition:background .25s var(--ease),color .25s var(--ease)}
+.cs .back:hover{background:var(--paper-2);color:var(--ink)}
+.cs .back svg{width:14px;height:14px}
+.cs h1{margin-top:22px;font-size:clamp(32px,5vw,48px);font-weight:700;letter-spacing:-.035em;line-height:1.05}
+.cs h1 span{display:block;font-size:clamp(18px,2.4vw,24px);font-weight:400;color:var(--ink-2);letter-spacing:-.01em;margin-top:8px;line-height:1.3}
+.cs .facts{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px 20px;border-top:1px solid var(--rule);padding-top:16px}
+.cs .facts dt{font-size:12px;color:var(--ink-3)}
+.cs .facts dd{font-size:14.5px;margin-top:2px}
+.cs figure{margin:34px 0 0;border-radius:12px;overflow:hidden;background:var(--paper-2)}
+.cs figure img{width:100%;height:auto;display:block}
+.cs figcaption{font-size:13px;color:var(--ink-3);padding:10px 2px 0}
+.cs figure.cover{margin-top:30px}
+.cs .summary{margin-top:30px;font-size:clamp(18px,2.2vw,21px);line-height:1.5;letter-spacing:-.01em}
+.cs .impact{margin-top:30px;padding:20px 22px;border-radius:12px;background:var(--paper-2)}
+.cs .impact h2{margin:0;font-size:16px;display:flex;justify-content:space-between;align-items:baseline}
+.cs .impact h2 .hand{font-size:19px;font-weight:500}
+.cs h2{margin-top:44px;font-size:24px;font-weight:600;letter-spacing:-.02em}
+.cs h3{margin-top:24px;font-size:18px;font-weight:600}
+.cs p{margin-top:14px;font-size:16.5px;line-height:1.65;color:var(--ink-2);max-width:62ch}
+.cs .ticks{list-style:none;margin-top:14px;display:grid;gap:9px}
+.cs .ticks li{display:flex;gap:10px;font-size:15.5px;line-height:1.5;color:var(--ink)}
+.cs .ticks .chk{width:18px;height:18px;flex:none;margin-top:3px}
+.cs .ticks .chk *{stroke:var(--line);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.cs .ticks .chk .tick{stroke:var(--primary);stroke-width:2.2}
+.cs ol{margin-top:14px;padding-left:22px;display:grid;gap:8px;font-size:15.5px;line-height:1.5}
+.cs .aside{font-size:22px;margin-top:10px;transform:rotate(-2deg);display:inline-block}
+.cs .next{margin-top:56px;border-top:1px solid var(--rule);padding-top:20px;display:grid;gap:12px}
+.cs .next a{display:grid;gap:2px;padding:14px 16px;border-radius:12px;background:var(--paper-2);transition:transform .35s var(--ease)}
+.cs .next a:hover{transform:translateY(-2px)}
+.cs .next a span{font-size:12.5px;color:var(--ink-3)}
+.cs .next a b{font-weight:500;font-size:16px}
