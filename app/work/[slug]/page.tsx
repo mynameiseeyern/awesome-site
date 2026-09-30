@@ -7,6 +7,7 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CrayonFilter } from "@/components/Crayon";
 import { BrandProcess } from "@/components/BrandProcess";
+import { Label, Recipe } from "@/components/Label";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -97,27 +98,12 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <h1>
             {cs.title} <span>{cs.subtitle}</span>
           </h1>
-          <dl className="facts">
-            <div>
-              <dt>Started</dt>
-              <dd>{cs.date}</dd>
-            </div>
-            <div>
-              <dt>Duration</dt>
-              <dd>{cs.duration}</dd>
-            </div>
-            <div>
-              <dt>Squad</dt>
-              <dd>{cs.squad}</dd>
-            </div>
-            <div>
-              <dt>My role</dt>
-              <dd>{cs.role}</dd>
-            </div>
-          </dl>
-          <figure className="cover">
-            <Image src={cs.cover.src} alt={cs.cover.alt} width={cs.cover.width} height={cs.cover.height} priority sizes="(max-width: 800px) 100vw, 760px" />
-          </figure>
+          <div className="bag-grid">
+            <figure className="cover">
+              <Image src={cs.cover.src} alt={cs.cover.alt} width={cs.cover.width} height={cs.cover.height} priority sizes="(max-width: 800px) 100vw, 400px" />
+            </figure>
+            <Label cs={cs} />
+          </div>
           <p className="summary">{cs.summary}</p>
           <div className="impact">
             <h2>
@@ -132,6 +118,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
               ))}
             </ul>
           </div>
+          <Recipe cs={cs} />
           {cs.body.map((b, i) => (
             <Render key={i} b={b} />
           ))}

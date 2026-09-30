@@ -25,6 +25,20 @@ export type CaseStudy = {
   summary: string;
   impact: string[];
   body: Block[];
+  // The bag label: how specialty coffee describes a lot, borrowed for a project.
+  label: {
+    origin: string; // where it was made
+    producer: string; // who made it
+    lot: string; // catalogue number
+    process: string; // how it was made (the coffee "washed / natural")
+    varietal: string; // what kind of work
+    altitude: string; // the scale it operates at
+    harvest: string; // when
+    roast: string; // how far it got: shipped, in production, prototype
+  };
+  notes: [string, string, string]; // tasting notes: what the work leaves behind
+  blend: { research: number; systems: number; ui: number; code: number }; // percentages, sum to 100
+  recipe: { k: string; v: string }[]; // brew guide
 };
 
 export const caseStudies: CaseStudy[] = [
@@ -44,6 +58,25 @@ export const caseStudies: CaseStudy[] = [
     },
     summary:
       "Chameleon is the design system mx51 uses to design, build and test dashboards and payment apps for some of Australia's major banks, POS partners and payment providers. It let a small team keep up with a fast-growing customer base without giving up consistency, accessibility or speed.",
+    label: {
+      origin: "mx51, Sydney",
+      producer: "Ee, 2 designers, 3 engineers, 1 delivery manager",
+      lot: "No. 02",
+      process: "Gecko Bank first, then swap the brand",
+      varietal: "Multi-brand design system",
+      altitude: "3 banks, 100+ POS partners",
+      harvest: "June 2023, ongoing",
+      roast: "In production",
+    },
+    notes: ["Consistency", "Half-day onboarding", "WCAG 2.1"],
+    blend: { research: 15, systems: 55, ui: 20, code: 10 },
+    recipe: [
+      { k: "Dose", v: "2 designers, 3 front-end engineers" },
+      { k: "Grind", v: "Tokens first, then components, then documentation" },
+      { k: "Temperature", v: "Bank-grade accessibility, held throughout" },
+      { k: "Time", v: "12 months to build, then ongoing support" },
+      { k: "Yield", v: "A new tenant themed in half a day, down from two weeks" },
+    ],
     impact: [
       "New tenant onboarding cut from two weeks to half a day",
       "One component library serving every brand, so features ship once",
@@ -111,6 +144,25 @@ export const caseStudies: CaseStudy[] = [
     },
     summary:
       "XODA brings operations, finances, marketing and people management into one platform for health businesses. The company moved from the Zenbly brand to XODA to match that ambition, and I led the design side of the change: the product, the sales prototypes, the design system and the culture around it.",
+    label: {
+      origin: "Zenbly, becoming XODA, Sydney",
+      producer: "Ee with Madhavi, Teja and John Rahme",
+      lot: "No. 01",
+      process: "Rebrand, simplify, prototype for sales",
+      varietal: "Founding designer, SaaS and mobile",
+      altitude: "Health businesses, boutique fitness studios",
+      harvest: "February 2022, 3 to 6 months",
+      roast: "Shipped",
+    },
+    notes: ["Simplicity", "Faster onboarding", "Deals closed"],
+    blend: { research: 20, systems: 25, ui: 40, code: 15 },
+    recipe: [
+      { k: "Dose", v: "1 designer, a BA, a QA and a co-founder" },
+      { k: "Grind", v: "One job per screen, more negative space" },
+      { k: "Temperature", v: "Weekly design digest to keep the company warm" },
+      { k: "Time", v: "2 days for the sales prototype, 3 to 6 months overall" },
+      { k: "Yield", v: "Onboarding about 80% faster, a 4-facility client signed" },
+    ],
     impact: [
       "Onboarding about 80% faster after the redesign",
       "A design system that sped up feature rollouts",

@@ -53,6 +53,11 @@ export function Work() {
                 <div className="body">
                   <h3>{p.title}</h3>
                   <p>{p.blurb}</p>
+                  <div className="notes">
+                    {p.notes.map((n) => (
+                      <span key={n}>{n}</span>
+                    ))}
+                  </div>
                   <div className="meta">
                     {p.company}, {p.years}
                   </div>

@@ -6,6 +6,7 @@ export type Project = {
   slug: string;
   title: string;
   blurb: string; // one sentence on the card
+  notes: [string, string, string]; // tasting notes, three words or short phrases
   company: string;
   years: string;
   role: string;
@@ -21,6 +22,7 @@ export const projects: Project[] = [
     slug: "clarion",
     title: "Clarion",
     blurb: "An endpoint widget plus a fleet dashboard for contact-centre IT, on IR's Iris AI platform.",
+    notes: ["Fleet visibility","Alert states","Shipped React"],
     company: "Integrated Research",
     years: "2026",
     role: "Sole product designer, design engineering",
@@ -47,6 +49,7 @@ export const projects: Project[] = [
     slug: "picasso",
     title: "Picasso design system",
     blurb: "IR's first design system: OKLCH tokens, a shadcn component library and multibrand theming.",
+    notes: ["OKLCH tokens","Multibrand","Handoff"],
     company: "Integrated Research",
     years: "2026",
     role: "Design ops lead, author of tokens and components",
@@ -73,6 +76,7 @@ export const projects: Project[] = [
     slug: "provisioning-portal",
     title: "Provisioning portal",
     blurb: "The internal control plane DevSecOps uses to stand up and manage customer tenants.",
+    notes: ["Tenant lifecycle","Shared control plane","DevSecOps"],
     company: "Integrated Research",
     years: "2026",
     role: "Product designer, working directly with DevSecOps",
@@ -98,6 +102,7 @@ export const projects: Project[] = [
     slug: "westpac-health-claiming",
     title: "Westpac health claiming",
     blurb: "A regulated health claims flow on the payment terminal, designed end to end.",
+    notes: ["Regulated flow","Accessibility","Discovery"],
     company: "mx51",
     years: "2023 - 2025",
     role: "Lead product designer",
@@ -123,6 +128,7 @@ export const projects: Project[] = [
     slug: "chameleon",
     title: "Chameleon design system",
     blurb: "One white-labelled library serving CBA, Westpac and Till Payments.",
+    notes: ["Consistency","Half-day onboarding","WCAG 2.1"],
     company: "mx51",
     years: "2022 - 2026",
     role: "Built and maintained across two squads",
@@ -147,6 +153,7 @@ export const projects: Project[] = [
     slug: "merchant-experience-app",
     title: "Merchant experience app",
     blurb: "Tipping, receipts and stored advice on the terminal. About 60% more feature usage, 30% fewer tickets.",
+    notes: ["Tipping","Receipts","Fewer tickets"],
     company: "mx51",
     years: "2022 - 2025",
     role: "Lead IC across two squads",
@@ -175,6 +182,7 @@ export const projects: Project[] = [
     slug: "xoda",
     title: "XODA",
     blurb: "Rebranding Zenbly as XODA and simplifying a health-business platform, as its first designer.",
+    notes: ["Simplicity","Faster onboarding","Deals closed"],
     company: "Zenbly / XODA",
     years: "2022",
     role: "Lead designer, first and only designer",
