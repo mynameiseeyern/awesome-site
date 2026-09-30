@@ -48,7 +48,7 @@ export function Contact() {
         <a href={site.linkedin} target="_blank" rel="noopener">
           LinkedIn <Ext />
         </a>
-        <a href={site.cv} target="_blank" rel="noopener">
+        <a href={site.cv} target="_blank" rel="noopener" download="Ee-Yern-Ng-CV.pdf">
           CV (PDF) <Ext />
         </a>
         <span>{site.location}</span>

@@ -33,7 +33,7 @@ export const site = {
     { when: "2018 - 2019", role: "Product Design and Branding", where: "at Geronimo" },
     { when: "2014 - 2017", role: "Bachelor of Commerce and Information Systems", where: "at UNSW" },
   ],
-  cv: "https://framerusercontent.com/assets/LDNmPzepR62komUPYvadC90lXJU.pdf",
+  cv: "/Ee-Yern-Ng-CV.pdf",
   mentoring: {
     intro: "I mentor designers on ADPList. If you are early in UX and want a second pair of eyes on your work, your CV or a decision, book a free 15 minutes.",
     link: "https://adplist.org/mentors/ee-ng?session=30150-11-intro-session-with-ee",

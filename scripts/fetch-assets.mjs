@@ -8,7 +8,6 @@ const assets = {
   "xoda-biz.png": "https://framerusercontent.com/images/KF6NnfJ65MhOUotVteNpVEhcMYo.png",
   "xoda-integration.png": "https://framerusercontent.com/images/vHmKGmqeQH8B40aLdp81cQ9PpU.png",
   "xoda-prototype.png": "https://framerusercontent.com/images/IdJrvvFV679twDdwjPo1Gsjmz4.png",
-  "ee-cv.pdf": "https://framerusercontent.com/assets/LDNmPzepR62komUPYvadC90lXJU.pdf",
 };
 
 await mkdir("public/work", { recursive: true });
