@@ -43,7 +43,7 @@ It downloads everything into `public/work/` and tells you which URLs to swap. Th
 | Page order | `app/page.tsx` |
 | Metadata, fonts, theme init script | `app/layout.tsx` |
 | Card crayon hover border | `components/Crayon.tsx` |
-| Easter eggs (C coffee, G paper, T theme, the mug) | `components/Footer.tsx` |
+| Easter eggs (C coffee beans, G paper, T theme, the mug) | `components/Footer.tsx` |
 
 ## Adding a project card
 

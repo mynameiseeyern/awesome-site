@@ -3,28 +3,17 @@ import { useEffect, useRef, useState } from "react";
 import { toggleTheme } from "./theme";
 import { site } from "@/content/site";
 
-// Footer plus every easter egg: C for a coffee ring, G to change the paper, T for the theme,
+// Footer plus every easter egg: C for a handful of coffee beans, G to change the paper, T for the theme,
 // and the mug that sips, steams and keeps a tally between visits.
 
-function ring() {
-  const seg: string[] = [];
-  for (let k = 0; k < 3; k++) {
-    const r = 60 + Math.random() * 8;
-    let d = "M";
-    for (let a = 0; a <= 360; a += 20) {
-      const rr = r + (Math.random() * 5 - 2.5);
-      d += (a ? " L" : "") + (75 + Math.cos((a * Math.PI) / 180) * rr).toFixed(1) + " " + (75 + Math.sin((a * Math.PI) / 180) * rr).toFixed(1);
-    }
-    seg.push(`<path d="${d} Z" stroke-width="${k === 0 ? 3.5 : k === 1 ? 1.6 : 0.9}"${k === 2 ? ' stroke-dasharray="14 9"' : ""}/>`);
-  }
-  return seg.join("");
-}
+// One hand-drawn coffee bean: an ellipse with the curved split down the middle, in the site's stroke.
+const BEAN = `<svg viewBox="0 0 40 40" aria-hidden="true"><ellipse cx="20" cy="20" rx="11" ry="16" transform="rotate(-25 20 20)"/><path d="M14 8c6 6 6 18 12 24" transform="rotate(-25 20 20)"/></svg>`;
 
 export function Footer() {
   const [cups, setCups] = useState(0);
   const [sip, setSip] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
-  const stains = useRef(0);
+  const beansAlive = useRef(0);
   const paper = useRef(0);
   const cupRef = useRef<HTMLButtonElement>(null);
   const toastTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -35,18 +24,34 @@ export function Footer() {
     toastTimer.current = setTimeout(() => setToast(null), 1600);
   };
 
+  // A handful of beans tumble onto the screen, settle for a moment, then fade away.
   const coffee = (x?: number, y?: number) => {
-    if (stains.current >= 8) return say("That is plenty of coffee for one day");
-    const w = document.createElement("div");
-    w.className = "stain";
-    w.style.setProperty("--r", `${Math.random() * 360}deg`);
-    w.style.left = `${x ?? Math.random() * (document.body.clientWidth - 160)}px`;
-    w.style.top = `${y ?? window.scrollY + Math.random() * (window.innerHeight - 160)}px`;
-    w.innerHTML = `<svg viewBox="0 0 150 150" aria-hidden="true">${ring()}</svg>`;
-    document.body.appendChild(w);
-    requestAnimationFrame(() => requestAnimationFrame(() => w.classList.add("in")));
-    stains.current++;
-    say(["Mug down", "Careful, that one was hot", "Another cup", `Coffee ring number ${stains.current}`][Math.min(stains.current - 1, 3)]);
+    if (beansAlive.current > 60) return;
+    const n = 7 + Math.floor(Math.random() * 6);
+    const cx = x ?? Math.random() * window.innerWidth;
+    const cy = y ?? Math.random() * window.innerHeight;
+    const spread = x == null ? 260 : 140;
+    for (let i = 0; i < n; i++) {
+      const b = document.createElement("div");
+      b.className = "bean";
+      const size = 18 + Math.random() * 18;
+      b.style.left = `${Math.min(Math.max(cx + (Math.random() - 0.5) * spread, 10), window.innerWidth - size - 10)}px`;
+      b.style.top = `${Math.min(Math.max(cy + (Math.random() - 0.5) * spread * 0.7, 10), window.innerHeight - size - 10)}px`;
+      b.style.width = `${size}px`;
+      b.style.setProperty("--r", `${Math.random() * 360}deg`);
+      b.style.setProperty("--drift", `${(Math.random() - 0.5) * 30}px`);
+      b.style.animationDelay = `${i * 70}ms, ${3200 + i * 70 + Math.random() * 800}ms`;
+      b.innerHTML = BEAN;
+      document.body.appendChild(b);
+      beansAlive.current++;
+      b.addEventListener("animationend", (e) => {
+        if (e.animationName === "bean-out") {
+          b.remove();
+          beansAlive.current--;
+        }
+      });
+    }
+    say(["Fresh beans", "Light roast", "Another handful", "That is a lot of coffee"][Math.floor(Math.random() * 4)]);
   };
 
   const cyclePaper = () => {
@@ -81,7 +86,7 @@ export function Footer() {
     setSip(true);
     setTimeout(() => setSip(false), 700);
     const r = cupRef.current?.getBoundingClientRect();
-    if (r) coffee(r.left + window.scrollX - 40, r.top + window.scrollY - 90);
+    if (r) coffee(r.left + r.width / 2, r.top - 20);
   };
 
   return (
@@ -90,7 +95,7 @@ export function Footer() {
         <div style={{ display: "grid", gap: 6 }}>
           <span>{site.name}, {new Date().getFullYear()}</span>
           <span>
-            Press <kbd>C</kbd> for coffee, <kbd>G</kbd> to change the paper, <kbd>T</kbd> for the theme
+            Press <kbd>C</kbd> for coffee beans, <kbd>G</kbd> to change the paper, <kbd>T</kbd> for the theme
           </span>
         </div>
         <button ref={cupRef} className={`cup${sip ? " sip" : ""}`} type="button" aria-label="Pour a coffee" title="Pour a coffee" onClick={onCup}>
