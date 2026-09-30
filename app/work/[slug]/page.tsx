@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const cs = getCaseStudy(slug);
   if (!cs) return {};
-  return { title: `${cs.title}, ${cs.subtitle}`, description: cs.summary, openGraph: { images: [cs.cover.src] } };
+  return { title: `${cs.title}, ${cs.subtitle}`, description: cs.summary, openGraph: { images: ["/og.png"] } };
 }
 
 const Check = () => (
