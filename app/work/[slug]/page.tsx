@@ -55,6 +55,15 @@ function Render({ b }: { b: Block }) {
       );
     case "process":
       return <BrandProcess />;
+    case "video":
+      return (
+        <figure className="video">
+          <div className="frame">
+            <iframe src={b.src} title={b.title} loading="lazy" allow="fullscreen" allowFullScreen />
+          </div>
+          {b.caption && <figcaption>{b.caption}</figcaption>}
+        </figure>
+      );
     case "note":
       return <div className="aside hand">{b.text}</div>;
     case "figure":

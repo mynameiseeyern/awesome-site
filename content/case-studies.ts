@@ -10,7 +10,8 @@ export type Block =
   | { type: "numbered"; items: string[] }
   | { type: "figure"; src: string; alt: string; caption?: string; width: number; height: number }
   | { type: "note"; text: string } // handwritten aside
-  | { type: "process" }; // Chameleon's "creating a new brand" diagram, components/BrandProcess.tsx
+  | { type: "process" } // Chameleon's "creating a new brand" diagram, components/BrandProcess.tsx
+  | { type: "video"; src: string; title: string; caption?: string }; // Loom embed, 16:9
 
 export type CaseStudy = {
   slug: string;
@@ -80,6 +81,12 @@ export const caseStudies: CaseStudy[] = [
           "Accessibility: WCAG 2.1 confidence built into the components",
           "Scalability: new tenant branding in minutes",
         ],
+      },
+      {
+        type: "video",
+        src: "https://www.loom.com/embed/8aa57d6a9ab040e99778e8a9438bbd3e?sid=e0a92cc1-9edb-41c1-81e8-e2d6bf26dfa5&hide_owner=true&hide_share=true&hide_title=true&hideEmbedTopBar=true",
+        title: "Chameleon design system explainer",
+        caption: "The short explainer made for mx51 staff, including the early colour mapping where the atomic elements were settled first so every product stayed consistent.",
       },
       { type: "h2", text: "What changed" },
       {
