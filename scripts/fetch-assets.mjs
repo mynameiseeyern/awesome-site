@@ -3,7 +3,6 @@
 import { mkdir, writeFile } from "node:fs/promises";
 
 const assets = {
-  "ee.png": "https://framerusercontent.com/images/q6TCm4lSgm6ShO7kLs7VCvHY4o.png",
   "chameleon-cover.jpg": "https://framerusercontent.com/images/UCQJvZo2PCNk50KPUxMo0iypQ.jpg",
   "chameleon-brands.jpg": "https://framerusercontent.com/images/BhWPH5KKPK881v6ogcJQxKTais.jpg",
   "xoda-biz.png": "https://framerusercontent.com/images/KF6NnfJ65MhOUotVteNpVEhcMYo.png",

@@ -24,7 +24,7 @@ npm run build    # production build, what Vercel runs
 
 ## Images from the old Framer site
 
-The portrait and the case-study images still load from Framer's CDN (`framerusercontent.com`, allowed in `next.config.mjs`). Before you shut the Framer project down, run:
+The case-study images still load from Framer's CDN (`framerusercontent.com`, allowed in `next.config.mjs`). Before you shut the Framer project down, run:
 
 ```bash
 npm run assets

@@ -9,7 +9,8 @@ export type Block =
   | { type: "list"; items: string[] }
   | { type: "numbered"; items: string[] }
   | { type: "figure"; src: string; alt: string; caption?: string; width: number; height: number }
-  | { type: "note"; text: string }; // handwritten aside
+  | { type: "note"; text: string } // handwritten aside
+  | { type: "process" }; // Chameleon's "creating a new brand" diagram, components/BrandProcess.tsx
 
 export type CaseStudy = {
   slug: string;
@@ -65,14 +66,7 @@ export const caseStudies: CaseStudy[] = [
           "Slow, repetitive handoffs between design and engineering",
         ],
       },
-      {
-        type: "figure",
-        src: "https://framerusercontent.com/images/BhWPH5KKPK881v6ogcJQxKTais.jpg",
-        width: 1600,
-        height: 900,
-        alt: "The same dashboard themed as Gecko Bank and as three partner brands",
-        caption: "Design once in Gecko Bank, then swap the brand.",
-      },
+      { type: "process" },
       { type: "h2", text: "The system" },
       {
         type: "p",

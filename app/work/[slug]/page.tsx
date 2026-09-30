@@ -6,6 +6,7 @@ import { caseStudies, getCaseStudy, type Block } from "@/content/case-studies";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { CrayonFilter } from "@/components/Crayon";
+import { BrandProcess } from "@/components/BrandProcess";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -52,6 +53,8 @@ function Render({ b }: { b: Block }) {
           ))}
         </ol>
       );
+    case "process":
+      return <BrandProcess />;
     case "note":
       return <div className="aside hand">{b.text}</div>;
     case "figure":
