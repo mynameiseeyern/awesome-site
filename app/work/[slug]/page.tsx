@@ -88,7 +88,8 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
       <CrayonFilter />
       <Nav />
       <main id="top" className="cs">
-        <article className="col">
+        <div className="cs-layout">
+        <article>
           <Link className="back" href="/#work">
             <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
               <path d="M12 7H2M6 3 2 7l4 4" />
@@ -98,10 +99,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
           <h1>
             {cs.title} <span>{cs.subtitle}</span>
           </h1>
-          <div className="bag-grid">
-            <figure className="cover">
-              <Image src={cs.cover.src} alt={cs.cover.alt} width={cs.cover.width} height={cs.cover.height} priority sizes="(max-width: 800px) 100vw, 400px" />
-            </figure>
+          <figure className="cover">
+            <Image src={cs.cover.src} alt={cs.cover.alt} width={cs.cover.width} height={cs.cover.height} priority sizes="(max-width: 800px) 100vw, 760px" />
+          </figure>
+          <div className="bag-inline">
             <Label cs={cs} />
           </div>
           <p className="summary">{cs.summary}</p>
@@ -133,6 +134,10 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
             ))}
           </nav>
         </article>
+        <aside className="bag-side" aria-label="Project label, floating">
+          <Label cs={cs} />
+        </aside>
+        </div>
         <Footer />
       </main>
     </>
