@@ -62,6 +62,7 @@ export const projects: Project[] = [
       "Token sync across Clarion, the provisioning portal and future products",
     ],
     tint: "lavender",
+    href: "/work/picasso",
     Sketch: () => (
       <svg viewBox="0 0 380 170" aria-hidden="true">
         <rect className="fill" x="52" y="36" width="52" height="52" rx="8" />

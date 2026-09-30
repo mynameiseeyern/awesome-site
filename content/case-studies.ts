@@ -11,7 +11,9 @@ export type Block =
   | { type: "figure"; src: string; alt: string; caption?: string; width: number; height: number }
   | { type: "note"; text: string } // handwritten aside
   | { type: "process" } // Chameleon's "creating a new brand" diagram, components/BrandProcess.tsx
-  | { type: "video"; src: string; title: string; caption?: string }; // Loom embed, 16:9
+  | { type: "video"; src: string; title: string; caption?: string } // Loom embed, 16:9
+  | { type: "picasso" } // live Picasso showcase, components/PicassoShowcase.tsx
+  | { type: "code"; text: string; caption?: string }; // monospace block
 
 export type CaseStudy = {
   slug: string;
@@ -42,6 +44,87 @@ export type CaseStudy = {
 };
 
 export const caseStudies: CaseStudy[] = [
+  {
+    slug: "picasso",
+    title: "Picasso",
+    subtitle: "IR's design system, built to be read by people and agents",
+    date: "2026",
+    duration: "Ongoing, first release in a few months",
+    squad: "Ee, with IR's front-end engineers as consumers",
+    role: "Sole designer, author of tokens, components and docs",
+    cover: {
+      src: "/work/picasso-cover.png",
+      width: 1440,
+      height: 662,
+      alt: "A Clarion screen fragment built on Picasso tokens",
+    },
+    summary:
+      "Picasso is the design system for every IR product: 132 semantic tokens in light and dark, five theme axes, 44 documented components, one version across Figma, npm and the docs. The repo is the source of truth and Figma is a consumer. Every page is also served as Markdown, and the whole system ships as llms.txt files, so an agent building a screen reads the same rules an engineer does.",
+    label: {
+      origin: "Integrated Research, Sydney",
+      producer: "Ee, one designer, with the engineers who consume it",
+      lot: "No. 03",
+      process: "Repo first, Figma is a consumer",
+      varietal: "Design system, agent readable",
+      altitude: "Every IR cloud product, 44 components",
+      harvest: "2026, ongoing",
+      roast: "In production",
+    },
+    notes: ["One token set", "No raw hex", "Agent readable"],
+    blend: { research: 10, systems: 50, ui: 15, code: 25 },
+    recipe: [
+      { k: "Dose", v: "132 semantic tokens, 44 components, 5 theme axes" },
+      { k: "Grind", v: "Tokens in the repo, then components, then docs and Figma sync from the same source" },
+      { k: "Temperature", v: "On-colours are measured, not chosen: lightness is solved down until white text passes" },
+      { k: "Time", v: "One version number across Figma, npm and the docs, released together" },
+      { k: "Yield", v: "Clarion, the provisioning portal and future products themed off one token set, by people or by agents" },
+    ],
+    impact: [
+      "One token set powering Clarion, the provisioning portal and future IR cloud products",
+      "Five theme axes (colour, radius, spacing, main and mono type) so a brand is a block of values, not a fork",
+      "Published as llms.txt files, so an agent with the token table cannot invent a hex code",
+      "Live components in the docs, with variants, states and content guidance beside them",
+    ],
+    body: [
+      { type: "h2", text: "The repo is the source of truth" },
+      {
+        type: "p",
+        text: "Most design systems start in Figma and get ported to code, and the two drift. Picasso runs the other way. Tokens and components live in the repo as @ir/tokens and @ir/ui, the docs render the real React components, and Figma is synced from the same values. A change lands once and shows up everywhere with one version number.",
+      },
+      { type: "h2", text: "Try the theming axes" },
+      {
+        type: "p",
+        text: "Colour, radius, spacing, main type and mono type are the five axes. Below is a small piece of a Clarion screen built on Picasso's real token values. Flip the mode and the radius and spacing scales and watch every component follow, because none of them know their own colours.",
+      },
+      { type: "picasso" },
+      { type: "note", text: "click a swatch to copy its hex" },
+      { type: "h2", text: "Agent readable" },
+      {
+        type: "p",
+        text: "Every docs page is also served as Markdown, and the whole system is published as a set of llms.txt files: an index, the foundations, the components and the token table. When Claude Code or the Figma MCP builds a screen for IR, it reads these first. An agent with the token table cannot invent a hex code, and the content rules travel with it, so the copy comes out in IR's register too.",
+      },
+      {
+        type: "code",
+        text: "# https://ir-picasso.vercel.app/llms-tokens.txt\n\nbg/app            surface-app        light #F8FAFC   dark #121926\nbg/canvas         surface-canvas     light #EEF2F6   dark #0A0E15\nbg/card           surface-card       light #FFFFFF   dark #202939\nstatus/healthy    status-healthy     light #079455   dark #47CD89\nstatus/warning    status-warning     light #DC6803   dark #FDB022\nstatus/critical   status-critical    light #D92D20   dark #F97066\n\n# Never use a raw hex. Every colour in Picasso is one of these.",
+        caption: "What an agent sees. The same table drives the components above.",
+      },
+      { type: "h2", text: "Foundations and content, not just components" },
+      {
+        type: "list",
+        items: [
+          "Foundations: grid, spacing, radius, typography, colour, with tokens and brand blocks that generate [data-brand] CSS",
+          "Content: voice and register, casing, buttons and labels, errors, empty and loading states, numbers, units and time, terminology",
+          "Components: 44 live React components with variants, states and guidance, from Accordion to Tooltip, including KpiTile, Meter, Stepper and ThresholdSlider for monitoring work",
+          "Contributing: a component checklist, and a route for reporting off-system output back into the system",
+        ],
+      },
+      { type: "h2", text: "Where it lives" },
+      {
+        type: "p",
+        text: "The docs are at ir-picasso.vercel.app. Clarion and the provisioning portal are built on it, and the design agents work that comes next is what it was built for: a machine-readable design contract that a prototype can be checked against.",
+      },
+    ],
+  },
   {
     slug: "chameleon",
     title: "Chameleon",

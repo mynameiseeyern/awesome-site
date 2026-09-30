@@ -8,6 +8,7 @@ import { Footer } from "@/components/Footer";
 import { CrayonFilter } from "@/components/Crayon";
 import { BrandProcess } from "@/components/BrandProcess";
 import { Label, Recipe } from "@/components/Label";
+import { PicassoShowcase } from "@/components/PicassoShowcase";
 
 export function generateStaticParams() {
   return caseStudies.map((c) => ({ slug: c.slug }));
@@ -56,6 +57,15 @@ function Render({ b }: { b: Block }) {
       );
     case "process":
       return <BrandProcess />;
+    case "picasso":
+      return <PicassoShowcase />;
+    case "code":
+      return (
+        <figure className="code">
+          <pre>{b.text}</pre>
+          {b.caption && <figcaption>{b.caption}</figcaption>}
+        </figure>
+      );
     case "video":
       return (
         <figure className="video">
