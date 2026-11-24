@@ -49,8 +49,8 @@ export const caseStudies: CaseStudy[] = [
     title: "Picasso",
     subtitle: "IR's design system, built to be read by people and agents",
     date: "2026",
-    duration: "Ongoing, first release in a few months",
-    squad: "Ee, with IR's front-end engineers as consumers",
+    duration: "April 2026 to now, v2.0 shipped October 2026",
+    squad: "Ee, with IR's front-end chapter",
     role: "Sole designer, author of tokens, components and docs",
     cover: {
       src: "/work/picasso-cover.png",
@@ -59,21 +59,21 @@ export const caseStudies: CaseStudy[] = [
       alt: "A Clarion screen fragment built on Picasso tokens",
     },
     summary:
-      "Picasso is the design system for every IR product: 132 semantic tokens in light and dark, five theme axes, 44 documented components, one version across Figma, npm and the docs. The repo is the source of truth and Figma is a consumer. Every page is also served as Markdown, and the whole system ships as llms.txt files, so an agent building a screen reads the same rules an engineer does.",
+      "I joined Integrated Research as its first product designer, with no design function and several products that each looked like whoever built them. Picasso is how one designer makes the right screen the easy one to build: 138 semantic colour tokens in light and dark, five theme axes, 60 documented components and one version across Figma, npm and the docs. The repo is the source of truth, and an agent building a screen reads the same rules an engineer does.",
     label: {
       origin: "Integrated Research, Sydney",
-      producer: "Ee, one designer, with the engineers who consume it",
+      producer: "Ee, one designer, built with IR's front-end chapter",
       lot: "No. 03",
       process: "Repo first, Figma is a consumer",
       varietal: "Design system, agent readable",
-      altitude: "Every IR cloud product, 44 components",
+      altitude: "Every IR cloud product, 60 components",
       harvest: "2026, ongoing",
-      roast: "In production",
+      roast: "In production, v2.0",
     },
     notes: ["One token set", "No raw hex", "Agent readable"],
     blend: { research: 10, systems: 50, ui: 15, code: 25 },
     recipe: [
-      { k: "Dose", v: "132 semantic tokens, 44 components, 5 theme axes" },
+      { k: "Dose", v: "138 semantic colour tokens, 60 components, 5 theme axes, 2 brands" },
       { k: "Grind", v: "Tokens in the repo, then components, then docs and Figma sync from the same source" },
       { k: "Temperature", v: "On-colours are measured, not chosen: lightness is solved down until white text passes" },
       { k: "Time", v: "One version number across Figma, npm and the docs, released together" },
@@ -84,8 +84,32 @@ export const caseStudies: CaseStudy[] = [
       "Five theme axes (colour, radius, spacing, main and mono type) so a brand is a block of values, not a fork",
       "Published as llms.txt files, so an agent with the token table cannot invent a hex code",
       "Live components in the docs, with variants, states and content guidance beside them",
+      "746 automated tests and custom lint rules, so contrast, right-to-left layout and off-system values fail before review",
     ],
     body: [
+      { type: "h2", text: "Where it started" },
+      {
+        type: "p",
+        text: "I joined IR in April 2026 as its first product designer. IR is an ASX-listed software company with several products, including Prognosis and Clarion, and until then there was no design function. Products were designed by whoever built them, so each one had its own blues, its own buttons and its own way of saying something went wrong.",
+      },
+      {
+        type: "p",
+        text: "One designer can't sit in every team's meetings. So the question wasn't what a screen should look like, but how to make the right screen the easiest one to build, even when I'm not in the room. Picasso is my answer.",
+      },
+      { type: "h2", text: "How it was built" },
+      {
+        type: "numbered",
+        items: [
+          "Audit. I went through every product and the existing Figma library and logged real defects: ghost buttons with a resting fill, toasts with both an action and a close, one variant at a different radius from its siblings. They became Picasso's list of things it must never do.",
+          "Tokens first. Colour, type, spacing, radius, motion and layering, as data in the repo. Figma receives them through a sync plugin instead of being the place they're decided.",
+          "Components in dependency order. Button first, because it sits inside Alert, Toast, Dialog, Drawer and Sidebar. Then forms, overlays and tables, and the monitoring pieces off-the-shelf kits don't have: KPI tile, meter, threshold slider, sparkline, heatmap.",
+          "Docs and content rules at the same time. A component isn't done until it has guidance, empty, loading and error copy, and a story.",
+        ],
+      },
+      {
+        type: "p",
+        text: "I built it with IR's front-end chapter, not for them. Figma decides how a component behaves, the repo decides every token value, and neither side fixes the other without checking which one is right.",
+      },
       { type: "h2", text: "The repo is the source of truth" },
       {
         type: "p",
@@ -98,6 +122,16 @@ export const caseStudies: CaseStudy[] = [
       },
       { type: "picasso" },
       { type: "note", text: "click a swatch to copy its hex" },
+      { type: "h2", text: "A brand is a set of choices, not a fork" },
+      {
+        type: "p",
+        text: "A brand is one small file that picks an option per axis (colour, warm or cool neutrals, radius, spacing, type) and inherits everything else. I proved it with a second test brand, Vantage, before anyone needed one.",
+      },
+      {
+        type: "p",
+        text: "The hard part was colour. Generate a ramp freely and some hues can't carry white text, and the tempting fix is to flip the button text to dark. Then a primary button looks different in every brand. Instead, the generator solves lightness down until white text passes WCAG AA, so between brands only the hue changes. OKLCH lightness isn't contrast, so it solves rather than looking up a table.",
+      },
+      { type: "note", text: "a red brand doesn't make errors green" },
       { type: "h2", text: "Agent readable" },
       {
         type: "p",
@@ -108,20 +142,62 @@ export const caseStudies: CaseStudy[] = [
         text: "# https://ir-picasso.vercel.app/llms-tokens.txt\n\nbg/app            surface-app        light #F8FAFC   dark #121926\nbg/canvas         surface-canvas     light #EEF2F6   dark #0A0E15\nbg/card           surface-card       light #FFFFFF   dark #202939\nstatus/healthy    status-healthy     light #079455   dark #47CD89\nstatus/warning    status-warning     light #DC6803   dark #FDB022\nstatus/critical   status-critical    light #D92D20   dark #F97066\n\n# Never use a raw hex. Every colour in Picasso is one of these.",
         caption: "What an agent sees. The same table drives the components above.",
       },
+      {
+        type: "p",
+        text: "The full llms.txt grew past half a megabyte, which is a lot of context to spend before writing a line. So Picasso also runs a small read-only MCP server. An agent asks about the one component it's using and gets about twenty lines back: the import, props, variants, do's and don'ts, and the accessibility rules. Both come out of the same build, so they can't disagree.",
+      },
+      {
+        type: "p",
+        text: "And if an agent still produces off-system code, the rule is that the docs failed, not the agent. We log which rule was broken and where it was, or wasn't, written down.",
+      },
+      { type: "h2", text: "Hard to go off-system" },
+      {
+        type: "p",
+        text: "Guidelines people have to remember don't scale. Checks do.",
+      },
+      {
+        type: "list",
+        items: [
+          "Lint rules reject raw hex values, Tailwind palette colours, physical left and right properties, and pages that skip the content width",
+          "746 automated tests, including every text-on-colour pair in both modes, right-to-left layout and the motion rules",
+          "Right-to-left from the start: Arabic, Hebrew and Persian work, with metrics, IP addresses and code kept left-to-right",
+          "Motion that has to earn it: most things don't move, and what does uses named animations from tokens, with reduced motion handled",
+        ],
+      },
       { type: "h2", text: "Foundations and content, not just components" },
       {
         type: "list",
         items: [
           "Foundations: grid, spacing, radius, typography, colour, with tokens and brand blocks that generate [data-brand] CSS",
           "Content: voice and register, casing, buttons and labels, errors, empty and loading states, numbers, units and time, terminology",
-          "Components: 44 live React components with variants, states and guidance, from Accordion to Tooltip, including KpiTile, Meter, Stepper and ThresholdSlider for monitoring work",
+          "Components: 60 live React components with variants, states and guidance, from Accordion to Tooltip, including KpiTile, Meter, Sparkline, Heatmap and ThresholdSlider for monitoring work",
           "Contributing: a component checklist, and a route for reporting off-system output back into the system",
+        ],
+      },
+      { type: "h2", text: "What it changed" },
+      {
+        type: "list",
+        items: [
+          "One designer supporting many teams through a system, not more meetings",
+          "Problems caught on screen, not in production: contrast, right-to-left and off-system values fail before review",
+          "Products that feel like one company: Clarion and the provisioning portal share one token set",
+          "Next to measure: how much new UI is built from Picasso components, and how often off-system output gets reported",
+        ],
+      },
+      { type: "h2", text: "What I learned" },
+      {
+        type: "list",
+        items: [
+          "Build the system with engineering, not for it. The best rules came from engineers asking why they couldn't just do something",
+          "A name the owner has to look up is a broken name. If I had to check what a token meant, so would everyone else",
+          "Check a claim against the source before repeating it, including my own numbers",
+          "A rule that isn't checked is a suggestion",
         ],
       },
       { type: "h2", text: "Where it lives" },
       {
         type: "p",
-        text: "The docs are at ir-picasso.vercel.app. Clarion and the provisioning portal are built on it, and the design agents work that comes next is what it was built for: a machine-readable design contract that a prototype can be checked against.",
+        text: "The docs are at ir-picasso.vercel.app, with an MCP endpoint for agents. Clarion and the provisioning portal are built on it. Next: a command palette, a log viewer and a metrics view, and a machine-readable design contract that a prototype can be checked against.",
       },
     ],
   },
