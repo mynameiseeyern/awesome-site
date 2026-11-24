@@ -75,6 +75,19 @@ function Render({ b }: { b: Block }) {
           {b.caption && <figcaption>{b.caption}</figcaption>}
         </figure>
       );
+    case "links":
+      return (
+        <ul className="ticks">
+          {b.items.map((l) => (
+            <li key={l.href}>
+              <Check />
+              <a href={l.href} target="_blank" rel="noreferrer">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      );
     case "note":
       return <div className="aside hand">{b.text}</div>;
     case "figure":

@@ -13,7 +13,8 @@ export type Block =
   | { type: "process" } // Chameleon's "creating a new brand" diagram, components/BrandProcess.tsx
   | { type: "video"; src: string; title: string; caption?: string } // Loom embed, 16:9
   | { type: "picasso" } // live Picasso showcase, components/PicassoShowcase.tsx
-  | { type: "code"; text: string; caption?: string }; // monospace block
+  | { type: "code"; text: string; caption?: string } // monospace block
+  | { type: "links"; items: { label: string; href: string }[] }; // external links, e.g. a live demo
 
 export type CaseStudy = {
   slug: string;
@@ -115,6 +116,14 @@ export const caseStudies: CaseStudy[] = [
         type: "p",
         text: "Most design systems start in Figma and get ported to code, and the two drift. Picasso runs the other way. Tokens and components live in the repo as @ir/tokens and @ir/ui, the docs render the real React components, and Figma is synced from the same values. A change lands once and shows up everywhere with one version number.",
       },
+      {
+        type: "figure",
+        src: "/work/picasso/docs-home.webp",
+        alt: "The Picasso docs home: packages @ir/tokens and @ir/ui, built on Tailwind v4, Radix and React 19, with the Clarion and Vantage brands",
+        caption: "The docs, at ir-picasso.vercel.app. One version across Figma, npm and this site",
+        width: 1600,
+        height: 1000,
+      },
       { type: "h2", text: "Try the theming axes" },
       {
         type: "p",
@@ -126,6 +135,14 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         text: "A brand is one small file that picks an option per axis (colour, warm or cool neutrals, radius, spacing, type) and inherits everything else. I proved it with a second test brand, Vantage, before anyone needed one.",
+      },
+      {
+        type: "figure",
+        src: "/work/picasso/create-a-brand.webp",
+        alt: "Picasso's Create a brand page: a colour picker generating an eleven-step OKLCH ramp beside a live monitoring screen that re-themes as you change it",
+        caption: "Create a brand: pick a colour, a neutral, a radius, spacing and type, and watch real components change",
+        width: 1600,
+        height: 1000,
       },
       {
         type: "p",
@@ -151,6 +168,14 @@ export const caseStudies: CaseStudy[] = [
         text: "And if an agent still produces off-system code, the rule is that the docs failed, not the agent. We log which rule was broken and where it was, or wasn't, written down.",
       },
       { type: "h2", text: "Hard to go off-system" },
+      {
+        type: "figure",
+        src: "/work/picasso/colour-docs.webp",
+        alt: "Picasso's colour foundations page, opening with the rule never a raw value, with examples of what to write instead",
+        caption: "The colour docs start with the rule, then show what to write instead",
+        width: 1600,
+        height: 1000,
+      },
       {
         type: "p",
         text: "Guidelines people have to remember don't scale. Checks do.",
@@ -198,6 +223,170 @@ export const caseStudies: CaseStudy[] = [
       {
         type: "p",
         text: "The docs are at ir-picasso.vercel.app, with an MCP endpoint for agents. Clarion and the provisioning portal are built on it. Next: a command palette, a log viewer and a metrics view, and a machine-readable design contract that a prototype can be checked against.",
+      },
+    ],
+  },
+  {
+    slug: "clarion",
+    title: "Clarion",
+    subtitle: "Call-readiness for contact-centre agents, and fleet health for the people who support them",
+    date: "2026",
+    duration: "April 2026 to November 2026",
+    squad: "Ee, with IR's Clarion product and engineering team",
+    role: "Sole product designer, design engineering",
+    cover: {
+      src: "/work/clarion/overview.webp",
+      width: 1600,
+      height: 1000,
+      alt: "The Clarion fleet overview: active endpoints, open alerts, the Clarion Network Score and a world map of endpoints by region",
+    },
+    summary:
+      "Clarion is a new cloud product from Integrated Research for contact-centre IT. It has two halves: a small widget on every agent's machine that says, in plain language, whether they're ready for calls, and a fleet dashboard that shows admins the health of every endpoint at once. I designed both, from problem framing to working React, as IR's only product designer, and built them on Picasso, the design system I was creating at the same time.",
+    label: {
+      origin: "Integrated Research, Sydney",
+      producer: "Ee, the only designer, with the Clarion team",
+      lot: "No. 04",
+      process: "Designed in code, on Picasso",
+      varietal: "B2B monitoring, endpoint widget and fleet dashboard",
+      altitude: "Every agent desktop in a contact centre",
+      harvest: "2026",
+      roast: "Working React product",
+    },
+    notes: ["Plain-language states", "Fleet visibility", "Built on Picasso"],
+    blend: { research: 20, systems: 20, ui: 35, code: 25 },
+    recipe: [
+      { k: "Dose", v: "One widget, one dashboard: overview, endpoints and thresholds" },
+      { k: "Grind", v: "Map every state the widget can be in before drawing a screen" },
+      { k: "Temperature", v: "Say what's wrong and what happens next, in words an agent can act on" },
+      { k: "Time", v: "April to November 2026" },
+      { k: "Yield", v: "A product built entirely from Picasso tokens and components, light and dark" },
+    ],
+    impact: [
+      "An agent sees one clear answer, ready for calls or not, with the reason in plain language",
+      "Every widget state designed, including licensing, waiting for data, failed collection and reconnecting",
+      "Admins see fleet health, the endpoints needing attention and why, without opening each machine",
+      "Warning and critical thresholds the customer can tune per metric",
+      "Built on Picasso, so light and dark mode and every status colour come from one token set",
+    ],
+    body: [
+      { type: "h2", text: "The problem" },
+      {
+        type: "p",
+        text: "In a contact centre, a bad call is often not the agent's fault. A headset drops out, the Wi-Fi gets jittery or the calling platform can't be reached, and the customer hears it before anyone knows why. The agent raises a ticket, IT goes looking, and by then the call is over.",
+      },
+      {
+        type: "p",
+        text: "Clarion monitors each agent's devices, network, system and calling platforms (Teams, Zoom, Webex, Genesys Cloud and NICE CXone) and serves two people: the agent, who needs to know whether they're ready for calls, and the IT admin, who needs to know which of a thousand machines need help first.",
+      },
+      { type: "h2", text: "The widget: one answer, in plain language" },
+      {
+        type: "p",
+        text: "The widget lives in the system tray. Most of the time it says one thing, \"You're ready for calls\", and stays out of the way. When something goes wrong, the affected tile turns amber or red and says what happened in words an agent can act on: your headphones disconnected and the call fell back to your laptop speakers. No error codes, no jargon.",
+      },
+      {
+        type: "figure",
+        src: "/work/clarion/widget-states.webp",
+        alt: "Four Clarion widget states side by side: ready for calls, a weak Wi-Fi warning, headphones not working, and reconnecting with last-known readings",
+        caption: "Four of the widget's states: ready, a weak network, a disconnected headset, and reconnecting with last-known readings",
+        width: 2000,
+        height: 598,
+      },
+      {
+        type: "p",
+        text: "Before drawing anything, I mapped every state the widget can be in, not just healthy and broken. Checking the licence, not licensed, waiting for first data, data collection failed, reconnecting, and reconnecting from a cold start each have their own design. When the connection drops, the last-known readings stay on screen with a \"last updated\" time, so the agent isn't looking at a blank panel or, worse, a green tick that's out of date.",
+      },
+      { type: "note", text: "the green tick has to be earned" },
+      {
+        type: "p",
+        text: "To show the states to stakeholders and customers, I built an interactive demo: a mock agent desktop with a video call, where you open Clarion from the tray and switch agents and issues to see exactly what each person would see.",
+      },
+      {
+        type: "figure",
+        src: "/work/clarion/widget-demo.webp",
+        alt: "The Clarion widget demo: a mock video call on an agent desktop, with a panel for choosing an agent and simulating an issue",
+        caption: "The demo, live at ir-clarion.vercel.app/widget#/demo. Open Clarion from the tray, then simulate an issue",
+        width: 1600,
+        height: 1000,
+      },
+      { type: "h2", text: "The dashboard: which machines need help first" },
+      {
+        type: "p",
+        text: "The admin side starts with the whole fleet: active endpoints against the total, open alerts, and the Clarion Network Score, one number for overall health. A map groups endpoints by region, so a problem in one site stands out from a problem everywhere.",
+      },
+      {
+        type: "p",
+        text: "Below that is a list of the endpoints needing attention, sorted by severity, with the reason on the row: packet loss, high latency, an audio driver that failed, a platform that can't be reached. Selecting one opens its detail beside the list, split into network, calling platforms, devices and system, so an admin can triage without losing their place.",
+      },
+      {
+        type: "figure",
+        src: "/work/clarion/endpoint-detail.webp",
+        alt: "Clarion's endpoints needing attention list, with one endpoint open showing quality index, latency, packet loss and jitter",
+        caption: "Triage in place: the list stays put while the endpoint's detail opens beside it",
+        width: 1600,
+        height: 1000,
+      },
+      {
+        type: "figure",
+        src: "/work/clarion/endpoints.webp",
+        alt: "The Clarion endpoints table, filtered to endpoints with alerts, showing status, location, network score and the latest alert",
+        caption: "Every endpoint, filterable by alerts, location and status",
+        width: 1600,
+        height: 1000,
+      },
+      { type: "h2", text: "Thresholds the customer owns" },
+      {
+        type: "p",
+        text: "What counts as a warning in one contact centre is normal in another. So the thresholds behind every status are the customer's to set: network quality, Wi-Fi signal, CPU, memory and disk each have a warning and a critical point on a slider, with the direction spelled out, higher is worse or lower is worse.",
+      },
+      {
+        type: "figure",
+        src: "/work/clarion/thresholds.webp",
+        alt: "Clarion threshold settings, with warning and critical points on sliders for network quality, Wi-Fi signal, CPU, memory and disk",
+        caption: "One rule per metric, applied to every endpoint unless a custom threshold overrides it",
+        width: 1600,
+        height: 1000,
+      },
+      { type: "h2", text: "Built on Picasso" },
+      {
+        type: "p",
+        text: "Clarion was the first product built on Picasso, IR's design system, and the two grew together. The status colours, the KPI tiles, the meters and the threshold slider are Picasso components, and the product never uses a raw hex value. Dark mode wasn't a separate design: it comes from the same tokens.",
+      },
+      {
+        type: "figure",
+        src: "/work/clarion/overview-dark.webp",
+        alt: "The Clarion fleet overview in dark mode",
+        caption: "Dark mode, from the same token set",
+        width: 1600,
+        height: 1000,
+      },
+      { type: "h2", text: "What I did" },
+      {
+        type: "list",
+        items: [
+          "Framed the problem and the two audiences, agents and IT admins",
+          "Mapped and designed every widget state, including licensing, data and connection states",
+          "Designed the fleet overview, endpoint triage, endpoints table and threshold settings",
+          "Wrote the UX copy and error states, so each problem comes with a plain-language reason",
+          "Built it in React, Next.js and Tailwind on Picasso, including the interactive widget demo",
+        ],
+      },
+      { type: "h2", text: "What I learned" },
+      {
+        type: "list",
+        items: [
+          "The in-between states are the product. Healthy and broken are easy; waiting, reconnecting and out-of-date are where trust is won or lost",
+          "Designing in code made the states real. A tray, a call and a dropped headset in a demo did more than a Figma flow",
+          "Building a product and a design system at the same time keeps the system honest",
+        ],
+      },
+      { type: "h2", text: "See it" },
+      {
+        type: "links",
+        items: [
+          { label: "Clarion fleet dashboard", href: "https://ir-clarion.vercel.app/" },
+          { label: "Widget demo: open Clarion from the tray, then simulate an issue", href: "https://ir-clarion.vercel.app/widget#/demo" },
+          { label: "Picasso, the design system it's built on", href: "https://ir-picasso.vercel.app/" },
+        ],
       },
     ],
   },

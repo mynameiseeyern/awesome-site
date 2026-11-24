@@ -35,6 +35,7 @@ export const projects: Project[] = [
       "Shipped in React, Next.js and Tailwind on shadcn/ui",
     ],
     tint: "sky",
+    href: "/work/clarion",
     Sketch: () => (
       <svg viewBox="0 0 380 170" aria-hidden="true">
         <rect className="fill" x="40" y="30" width="180" height="110" rx="5" />
