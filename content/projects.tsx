@@ -19,6 +19,35 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "dibby",
+    title: "Dibby",
+    blurb: "My own consumer app for getting the group chat from \"we should\" to actually going.",
+    notes: ["No app for your mates","Vote and split","Gen Z voice"],
+    company: "My own product",
+    years: "2026",
+    role: "Founder: product, design and engineering",
+    lead:
+      "A group-plan app with an AI character in every plan. Tell Dibby the plan, drop one link in the group chat, and your mates tap in, vote on where and when, then split the bill after. No app or account needed for them.",
+    did: [
+      "Chat-style plan making with Dibby, one question at a time",
+      "Guest-first joining, voting and spin the wheel for ties",
+      "Bill splitting and PayID settle-up, without touching money",
+      "Brand, mascot, design system, web app and native app",
+    ],
+    tint: "lavender",
+    href: "/work/dibby",
+    Sketch: () => (
+      <svg viewBox="0 0 380 170" aria-hidden="true">
+        <rect className="fill" x="96" y="18" width="88" height="140" rx="12" />
+        <path d="M110 44h46M110 60h60M110 74h38M110 88h52" />
+        <rect className="fill" x="110" y="122" width="60" height="18" rx="9" />
+        <rect className="fill" x="204" y="18" width="88" height="140" rx="12" />
+        <path d="M218 44h40M218 60h56M218 76h30M218 92h48" />
+        <circle cx="262" cy="128" r="12" strokeDasharray="3 6" />
+      </svg>
+    ),
+  },
+  {
     slug: "clarion",
     title: "Clarion",
     blurb: "An endpoint widget plus a fleet dashboard for contact-centre IT, on IR's Iris AI platform.",
